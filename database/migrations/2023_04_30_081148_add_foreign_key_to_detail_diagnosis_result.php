@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('detail_diagnosis_result', function (Blueprint $table) {
             $table->foreign('hdq_id')->references('hdq_id')->on('header_questions');
-            $table->foreign('dtq_id')->references('dtq_id')->on('header_questions');
+            $table->foreign('dtq_id')->references('dtq_id')->on('detail_questions');
         });
     }
 
@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('detail_diagnosis_result', function (Blueprint $table) {
-            $table->dropforeign(['hdq_id', 'dtq_id']);
+            $table->dropforeign('detail_diagnosis_result_dtq_id_foreign' );
+            $table->dropForeign('detail_diagnosis_result_hdq_id_foreign');
         });
     }
 };

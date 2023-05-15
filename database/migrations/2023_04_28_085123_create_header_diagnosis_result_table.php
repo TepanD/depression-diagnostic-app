@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('mapds_id');
             $table->datetime('result_date');
             $table->string('create_operator');
-            $table->string('last_operator');
+            $table->string('last_operator')->nullable();
             $table->timestamps();
 
             $table->primary(['hdr_id']);

@@ -17,8 +17,10 @@ return new class extends Migration
             $table->integer('max_score');
             $table->string('result_desc', 255);
             $table->string('result_additional_desc')->nullable();
-            $table->boolean('is_active')->default(false);
+            $table->string('is_active',1)->default('T');
             $table->softDeletes('is_deleted');
+            $table->string('create_operator');
+            $table->string('last_operator')->nullable();
             $table->timestamps();
 
             $table->primary('mapds_id');

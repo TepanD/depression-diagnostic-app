@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('detail_diagnosis_result', function (Blueprint $table) {
             $table->string('ddr_id');
+            $table->string('hdr_id');
             $table->string('user_id');
             $table->string('hdq_id');
             $table->string('dtq_id');
             $table->integer('score');
             $table->string('create_operator');
-            $table->string('last_operator');
+            $table->string('last_operator')->nullable();
             $table->timestamps();
 
+            $table->primary('ddr_id');
         });
     }
 
