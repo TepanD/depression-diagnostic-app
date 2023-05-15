@@ -15,6 +15,24 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if (auth()->user()->role == 'admin')
+                        <x-nav-link :href="route('questions.index')" :active="request()->routeIs('questions.*')">
+                            {{ __('Question') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('mapping-diagnosis-score.index')" :active="request()->routeIs('mapping-diagnosis-score.*')">
+                            {{ __('Mapping Diagnosis Score') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('header-diagnosis-result.index')" :active="request()->routeIs('header-diagnosis-result.*')">
+                            {{ __('Diagnosis Result') }}
+                        </x-nav-link>
+                    @endif
+
+                    <x-nav-link :href="route('hdr.show_diagnostic_page')" :active="request()->routeIs('hdr.show_diagnostic_page')">
+                        {{ __('Testing diagnosis') }}
+                    </x-nav-link>
                 </div>
             </div>
 

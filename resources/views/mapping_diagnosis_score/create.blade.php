@@ -1,0 +1,83 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Create Mapping Diagnosis Score') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="relative rounded-xl overflow-auto dark:text-slate-200 p-10">
+
+                    <form method="POST" action="{{ route('mapping-diagnosis-score.store') }}">
+                        @csrf
+                        <x-input-label for="result_desc" :value="__('Result Description')" />
+                        <input type="text" name="result_desc" id="txt_resultdesc" value="{{ old('result_desc') }}"
+                            class="{{ $errors->has('result_desc') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('result_desc')
+                            <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        @if (!$errors->has('result_desc'))
+                            <br />
+                        @endif
+                        <br />
+                        <x-input-label for="result_additional_desc" :value="__('Result Additional Description')" />
+                        <textarea id="txt_resultadddesc" name="result_additional_desc" value="{{ old('result_additional_desc') }}"
+                            rows="5" cols="40"
+                            class="{{ $errors->has('result_additional_desc') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"></textarea>
+                        @error('result_additional_desc')
+                            <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        @if (!$errors->has('result_additional_desc'))
+                            <br />
+                        @endif
+                        <br />
+                        <x-input-label for="min_score" :value="__('Minimum Score')" />
+                        <input type="number" min="0" name="min_score" id="txt_minscore"
+                            value="{{ old('min_score') }}"
+                            class="{{ $errors->has('min_score') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('min_score')
+                            <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        @if (!$errors->has('min_score'))
+                            <br />
+                        @endif
+                        <br />
+                        <x-input-label for="max_score" :value="__('Maximum Score')" />
+                        <input type="number" min="1" name="max_score" id="txt_maxscore"
+                            value="{{ old('max_score') }}"
+                            class="{{ $errors->has('max_score') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        @error('max_score')
+                            <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        @if (!$errors->has('max_score'))
+                            <br />
+                        @endif
+                        <br />
+                        <div class="flex items-center mb-4">
+                            <input checked id="cb_isactive" type="checkbox" name="is_active"
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="cb_isactive"
+                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is Active</label>
+                        </div>
+
+                        <br />
+                        <button
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                            type="submit">submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

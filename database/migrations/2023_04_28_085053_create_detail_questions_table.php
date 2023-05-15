@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('dtq_id');
             $table->string('dtq_name');
             $table->integer('dtq_sequence');
+            $table->string('hdq_id');
             $table->string('score')->nullable();
             $table->softDeletesDatetime('is_deleted');
             $table->string('create_operator');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary('dtq_id');
+            $table->foreign('hdq_id')->references('hdq_id')->on('header_questions');
         });
     }
 
