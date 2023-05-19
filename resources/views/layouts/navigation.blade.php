@@ -112,7 +112,23 @@
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('questions.index')">
+                        {{ __('Question') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('mapping-diagnosis-score.index')">
+                        {{ __('Mapping Diagnosis Score') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('header-diagnosis-result.index')">
+                        {{ __('Diagnosis Result') }}
+                    </x-responsive-nav-link>
                 @endif
+
+                <x-responsive-nav-link :href="route('hdr.show_diagnostic_page')">
+                    {{ __('Testing diagnosis') }}
+                </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
