@@ -13,7 +13,7 @@
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-8">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('hdr.store_diagnostic_result') }}">
                             @csrf
                             @foreach ($headerQuestions as $headerQuestion)
                                 <div class="mb-8">

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
@@ -17,7 +18,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $headerQuestions = HeaderQuestion::all();
+        $headerQuestions = HeaderQuestion::paginate(5);
 
         return view('questions.index', compact('headerQuestions'));
     }
@@ -103,6 +104,18 @@ class QuestionController extends Controller
         return back()->with('success', 'Header Question deleted successfully.');
     }
 
+    public function update_hdq_is_active(Request $request){
+        if($request->ajax()){
+            $headerQuestion = HeaderQuestion::findOrFail($request->hdq_id);
+
+            $headerQuestion->update([
+                'is_active'=> $request->is_active
+            ]);
+
+            echo "is_active update success";
+        }
+    }
+
     /**
      * Get detail question by hdq_id
      */
@@ -156,4 +169,21 @@ class QuestionController extends Controller
             echo 'DetailQuestion deleted';
         }
     }
+
+    /**
+    * search header question
+    */
+    public function search_header_question(Request $request)
+    {
+        if($request->ajax()){
+            if(!Str::contains($request->column, 'Select')){
+                $headerQuestions = HeaderQuestion::where($request->column, 'LIKE', '%'.$request->keyword."%")->get();
+
+                if($headerQuestions){
+                    return response()->json($headerQuestions);
+                }
+            }
+        }
+    }
+
 }

@@ -35,6 +35,9 @@
                                     <th scope="col" class="px-6 py-3">
                                         result_date
                                     </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +73,7 @@
                     </div>
                 </div>
 
+                {{ $headerDiagnosisResults->links() }}
 
             </div>
         </div>

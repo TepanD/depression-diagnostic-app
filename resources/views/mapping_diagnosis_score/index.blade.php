@@ -18,7 +18,7 @@
                     <div class="relative rounded-xl overflow-auto">
                         <div class="shadow-sm overflow-hidden p-4">
                             <a href="{{ route('mapping-diagnosis-score.create') }}"
-                                class="px-4 py-2 font-semibold text-sm hover:bg-sky-500 bg-sky-600 duration-100 text-white rounded-md shadow-sm opacity-100">Add</a>
+                                class="px-4 py-2 font-semibold text-sm hover:bg-blue-500 bg-blue-600 duration-100 text-white rounded-md shadow-sm opacity-100">Add</a>
                         </div>
                     </div>
                 </div>
@@ -85,12 +85,22 @@
                                         <td class="px-6 py-4">
                                             {{ $mappingDiagnosisScore->result_additional_desc }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        {{-- <td class="px-6 py-4">
                                             <div class="flex items-center">
                                                 <input {{ $mappingDiagnosisScore->is_active == 'T' ? 'checked' : '' }}
                                                     disabled id="checkbox-table-search-1" type="checkbox"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             </div>
+                                        </td> --}}
+                                        <td class="px-6 py-4">
+                                            <label class="relative inline-flex items-center mb-4 cursor-pointer">
+                                                <input {{ $mappingDiagnosisScore->is_active == 'T' ? 'checked' : '' }}
+                                                    type="checkbox" id="{{ $mappingDiagnosisScore->mapds_id }}"
+                                                    class="sr-only peer switch-isactive">
+                                                <div
+                                                    class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                                </div>
+                                            </label>
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $mappingDiagnosisScore->created_at }}
@@ -174,5 +184,54 @@
                 document.getElementById('hidMapDiagId').value = mdsID;
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            $(document).ready(() => {
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                $(document).on('click', '.switch-isactive', (e) => {
+                    let checked = $(e.target).is(':checked') ? "T" : "F";
+                    let mapds_id = $(e.target).attr('id');
+
+                    $.ajax({
+                        url: "{{ url('/') }}/mapping-diagnosis-score/update_mapds_is_active",
+                        method: "PUT",
+                        data: {
+                            is_active: checked,
+                            mapds_id: mapds_id,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: (data) => {
+                            Toast.fire({
+                                icon: 'success',
+                                title: `${mapds_id} ${checked === "T" ? "is activated" : "is deactivated"}`
+                            });
+                        },
+                        error: function(data, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                html: '<ul><li>data:' + data +
+                                    '</li>' +
+                                    '<li>status: ' + status +
+                                    '</li>' +
+                                    '<li>error: ' + error +
+                                    '</li>' +
+                                    '</ul>'
+                            });
+                        }
+                    })
+
+                });
+
+            });
+        }, false);
     </script>
 </x-app-layout>

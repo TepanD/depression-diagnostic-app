@@ -85,4 +85,20 @@ class MappingDiagnosisScoreController extends Controller
 
         return back()->with('success', 'Mapping deleted successfully.');
     }
+
+    /**
+     * Activate or deactivate a score mapping
+     */
+    public function update_mapds_is_active(Request $request)
+    {
+        if($request->ajax()){
+            $mappingDiagnosisScore = MappingDiagnosisScore::findOrFail($request->mapds_id);
+
+            $mappingDiagnosisScore->update([
+                'is_active'=> $request->is_active
+            ]);
+
+            echo "is_active update success";
+        }
+    }
 }

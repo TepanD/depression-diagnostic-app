@@ -2,7 +2,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="/login">
+    <div class="flex justify-center mb-4">
+        <h1>ADMINISTRATOR</h1>
+    </div>
+
+    <form method="POST" action="{{ route('login.administrator') }}">
         @csrf
 
         <!-- Email Address -->

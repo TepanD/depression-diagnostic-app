@@ -20,6 +20,26 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+     /**
+     * Display the login view.
+     */
+    public function create_administrator(): View
+    {
+        return view('auth.login-admin');
+    }
+
+    /**
+     * Login for administrators.
+     */
+    public function store_administrator(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate_admin();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+    }
+
     /**
      * Handle an incoming authentication request.
      */

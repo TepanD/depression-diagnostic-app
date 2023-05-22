@@ -30,6 +30,7 @@ class DiagnosticController extends Controller
     public function store_diagnostic_result(Request $request)
     {
         $mapdsIdResult = $this->store_all_diagnosis_result_to_db($request);
+        $mappingDiagnosisResult = MappingDiagnosisScore::findOrFail($mapdsIdResult)->first(); 
 
         return back()->with('success', json_encode($mapdsIdResult));
     }
@@ -52,7 +53,8 @@ class DiagnosticController extends Controller
         $totalScore = $chosenDetailQuestions->sum('score');
         $mapDiagnosisResult = MappingDiagnosisScore::where('min_score', '<=', $totalScore)
             ->where('max_score', '>=', $totalScore)
-            ->first();
+            ->where('is_active', 'T')
+            ->get();
         $savedHeaderDiagnosisResult = HeaderDiagnosisResult::create([
             'result_score'=>$totalScore,
             'mapds_id'=>$mapDiagnosisResult->mapds_id
