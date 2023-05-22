@@ -18,14 +18,14 @@
                             @foreach ($headerQuestions as $headerQuestion)
                                 <div class="mb-8">
                                     <label class='block font-medium text-sm text-gray-700 dark:text-gray-300'>
-                                        {{ $headerQuestion->hdq_id }} -{{ $headerQuestion->hdq_name }}
+                                        {{ $headerQuestion->hdq_name }}
                                     </label>
                                     @foreach ($detailQuestions->where('hdq_id', $headerQuestion->hdq_id)->sortBy('dtq_sequence') as $detailQuestion)
                                         <label>
                                             <input type="checkbox" name="{{ $headerQuestion->hdq_id }}"
                                                 id="cb_{{ $detailQuestion->dtq_id }}"
                                                 value="{{ $detailQuestion->dtq_id }}">
-                                            {{ $detailQuestion->dtq_id }} - {{ $detailQuestion->dtq_name }}
+                                            {{ $detailQuestion->dtq_name }}
                                         </label><br />
                                     @endforeach
                                 </div>
