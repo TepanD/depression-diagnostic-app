@@ -31,13 +31,14 @@ class AuthenticatedSessionController extends Controller
     /**
      * Login for administrators.
      */
-    public function store_administrator(LoginRequest $request): RedirectResponse
+    public function store_administrator(LoginRequest $request)//: RedirectResponse
     {
         $request->authenticate_admin();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+        // return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
+        return redirect()->guest(route(RouteServiceProvider::HOME_ADMIN));
     }
 
     /**

@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
         //############### END OF Routes for Diagnosis Results #############
     });
    
-    Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
+    // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
     Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
 });
 
