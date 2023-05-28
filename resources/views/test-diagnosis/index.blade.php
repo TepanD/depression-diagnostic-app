@@ -54,8 +54,7 @@
                             test result
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="test-result-modal">
+                            class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -67,6 +66,9 @@
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
+
+                        <p><b>total_score</b></p>
+                        <p id="result-totalscore" style="margin-top:0"></p>
 
                         <p><b>mapds_id</b></p>
                         <p id="result-mapdsid" style="margin-top:0"></p>
@@ -87,8 +89,8 @@
                     <!-- Modal footer -->
                     <div
                         class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="test-result-modal" type="button"
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
+                        <button type="button"
+                            class="close-modal text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
                     </div>
                 </div>
             </div>
@@ -104,8 +106,28 @@
                     $('input[name="' + this.name + '"]').not(this).prop('checked', false);
                 });
 
-                //test-result-modal
+                //define test-result-modal
+                const $targetElement = document.getElementById('test-result-modal');
+                const modalOptions = {
+                    backdrop: 'dynamic',
+                    backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+                    closable: true,
+                    onHide: () => {
+                        $('div[modal-backdrop]').remove();
+                    }
+                }
+                const resultModal = new Modal($targetElement, modalOptions);
+
+                //result fetched
                 (() => {
+                    const hideModal = () => {
+                        resultModal.hide();
+                    }
+
+                    $('.close-modal').each(function() {
+                        $(this).on('click', hideModal);
+                    })
+
                     if (typeof $('#main-container').data('result-success') !== 'undefined') {
 
                     } else {
@@ -115,19 +137,12 @@
                     let result = $('#main-container').data("result");
                     if (!result) return false;
                     else {
-                        const $targetElement = document.getElementById('test-result-modal');
-                        const modalOptions = {
-                            backdrop: 'dynamic',
-                            backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
-                            closable: true
-                        }
-                        const resultModal = new Modal($targetElement, modalOptions);
-
                         $('#result-mapdsid').text(result.mapds_id);
                         $('#result-minscore').text(result.min_score);
                         $('#result-maxscore').text(result.max_score);
                         $('#result-desc').text(result.result_desc);
                         $('#result-additional-desc').text(result.result_additional_desc);
+                        $('#result-totalscore').text(result.total_score);
 
                         resultModal.show();
                     }
