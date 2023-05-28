@@ -9,9 +9,11 @@ use App\Models\HeaderQuestion;
 use App\Models\MappingDiagnosisScore;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class DiagnosticController extends Controller
 {
+    
 
     /* 
     * Show the diagnostic page
@@ -32,7 +34,7 @@ class DiagnosticController extends Controller
         $mapdsIdResult = $this->store_all_diagnosis_result_to_db($request);
         $mappingDiagnosisResult = MappingDiagnosisScore::findOrFail($mapdsIdResult)->first(); 
 
-        return back()->with('success', json_encode($mapdsIdResult));
+        return back()->with('result', json_encode($mappingDiagnosisResult));
     }
 
     private function store_all_diagnosis_result_to_db(Request $request)
@@ -54,12 +56,13 @@ class DiagnosticController extends Controller
         $mapDiagnosisResult = MappingDiagnosisScore::where('min_score', '<=', $totalScore)
             ->where('max_score', '>=', $totalScore)
             ->where('is_active', 'T')
-            ->get();
+            ->first();
+
         $savedHeaderDiagnosisResult = HeaderDiagnosisResult::create([
             'result_score'=>$totalScore,
             'mapds_id'=>$mapDiagnosisResult->mapds_id
         ]);
-
+        
         $arrayResult = array('mapds_id'=>$mapDiagnosisResult->mapds_id,
                             'hdr_id'=>$savedHeaderDiagnosisResult->hdr_id);
 
@@ -78,5 +81,12 @@ class DiagnosticController extends Controller
     
             $detailDiagnosisResult->save();
         });
+    }
+
+    public function demo_diagnostic_page(){
+        $headerQuestions = HeaderQuestion::orderBy('hdq_sequence', 'ASC')->where('is_active', 'T')->get();
+        $detailQuestions = DetailQuestion::all();
+        // $detailQuestions = DetailQuestion::where('is_active', 'T')->
+        return view('diagnosis.index', compact('headerQuestions', 'detailQuestions'));
     }
 }
