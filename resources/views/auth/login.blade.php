@@ -5,6 +5,8 @@
     <form method="POST" action="{{ route('login.user') }}">
         @csrf
 
+        <h3 class="mb-4 text-3xl font-thin text-gray-400 dark:text-white">Log In</h3>
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -30,6 +32,11 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif --}}
+
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                href="{{ route('register') }}">
+                {{ __('Don\'t have an account?') }}
+            </a>
 
             <x-primary-button class="ml-3">
                 {{ __('Log in') }}
