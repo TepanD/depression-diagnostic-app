@@ -122,7 +122,7 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 1500,
             });
 
             const fetch_data = () => {
@@ -219,7 +219,7 @@
                             Toast.fire({
                                 type: 'success',
                                 icon: 'success',
-                                title: data,
+                                title: data
                             });
                         },
                         error: function(data, status, error) {

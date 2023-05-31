@@ -30,11 +30,13 @@
                         <x-nav-link :href="route('header-diagnosis-result.index')" :active="request()->routeIs('header-diagnosis-result.*')">
                             {{ __('Diagnosis Result') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('hdr.show_diagnostic_page')" :active="request()->routeIs('hdr.show_diagnostic_page')">
+                            {{ __('Testing diagnosis') }}
+                        </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="route('hdr.show_diagnostic_page')" :active="request()->routeIs('hdr.show_diagnostic_page')">
-                        {{ __('Testing diagnosis') }}
-                    </x-nav-link>
+
                 </div>
             </div>
 

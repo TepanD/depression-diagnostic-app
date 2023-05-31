@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
    
     // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
     Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
-    Route::get('/diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
+    Route::get('/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
 });
 
 

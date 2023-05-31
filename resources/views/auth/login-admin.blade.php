@@ -2,8 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="flex justify-center mb-4">
-        <h1>ADMINISTRATOR</h1>
+    <div class="flex mb-4">
+        <span
+            class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Administrator</span>
     </div>
 
     <form method="POST" action="{{ route('login.administrator') }}">
