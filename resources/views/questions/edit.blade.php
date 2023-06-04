@@ -8,7 +8,7 @@
 
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-32">
             <a href="{{ url()->previous() }}"
                 style="display: flex;align-items: center;width: fit-content;column-gap: 0.6rem;"
                 class="inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 mb-2">
@@ -122,7 +122,7 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 1500,
             });
 
             const fetch_data = () => {
@@ -219,7 +219,7 @@
                             Toast.fire({
                                 type: 'success',
                                 icon: 'success',
-                                title: data,
+                                title: data
                             });
                         },
                         error: function(data, status, error) {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DiagnosticController;
 use App\Http\Controllers\HeaderDiagnosisResultController;
+use App\Http\Controllers\InformationPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\MappingDiagnosisScoreController;
@@ -30,7 +31,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-
+    Route::get('/information-page', [InformationPageController::class, 'show_information_page'])->name('info.show_information_page');
     
     Route::group(['middleware'=>['is_admin']], function(){
 
@@ -73,6 +74,8 @@ Route::middleware('auth')->group(function () {
    
     // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
     Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
+    //Route::get('/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
+    Route::get('download-pdf',[DiagnosticController::class, 'download_pdf'])->name('hdr.download_pdf');
 });
 
 
