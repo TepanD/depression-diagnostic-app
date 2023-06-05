@@ -5,7 +5,7 @@
     <form method="POST" action="{{ route('login.user') }}">
         @csrf
 
-        <h3 class="mb-8 text-3xl font-thin text-gray-400 dark:text-white">Log In</h3>
+        <h3 class="mb-6 text-3xl font-thin text-gray-400 dark:text-white">Log In</h3>
 
         <!-- Email Address -->
         <div>
