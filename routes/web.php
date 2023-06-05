@@ -6,6 +6,7 @@ use App\Http\Controllers\InformationPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\MappingDiagnosisScoreController;
+use App\Http\Controllers\UserController;
 use App\Models\MappingDiagnosisScore;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/header-diagnosis-result/fetch_detail_diagnosis_result_by_hdr_id', [HeaderDiagnosisResultController::class, "fetch_detail_diagnosis_result_by_hdr_id"]);
         Route::resource('header-diagnosis-result', HeaderDiagnosisResultController::class);
         //############### END OF Routes for Diagnosis Results #############
+
+        //############### Routes for User List #############
+        Route::put('/users/update_user_role', [UserController::class, "update_user_role"])->name('user.update_user_role');
+        Route::get('users', [UserController::class, "show_all_users"])->name('user.show_all_users');
+        //############### END OF Routes for User List #############
     });
    
     // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');

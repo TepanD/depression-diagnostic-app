@@ -56,9 +56,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-32">
             <div class="container mx-auto dark:bg">
 
-
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-8">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
+                <button id="tombol_panduan" class="mx-4 sm:mx-6 text-blue-600 underline">Panduan pengerjaan</button>
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-4">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg py-8 px-4 sm:px-6">
                         <form method="POST" action="{{ route('hdr.store_diagnostic_result') }}">
                             @csrf
                             @foreach ($headerQuestions as $headerQuestion)
@@ -96,13 +96,13 @@
     {{-- RESULT MODAL --}}
     @if (\Session::has('result'))
         <div id="test-result-modal" data-modal-target="test-result-modal" tabindex="-1"
-            class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex">
+            class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full justify-center items-center flex transform opacity-0 -translate-y-full transition-all duration-700 ease-in-out">
             <div class="relative w-full max-w-lg max-h-full">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
 
                     <!-- Modal body -->
-                    <div class="p-6 space-y-6">
+                    <div class="py-8 px-5 sm:p-8 space-y-6">
 
                         <div class="flex flex-row justify-center">
                             <img id="result-image" src="{{ url('/images/result-image-1.png') }}" alt="result-image"
@@ -166,12 +166,12 @@
 
     <!-- INSTRUCTION MODAL -->
     <div id="instruction-modal" tabindex="-1" data-modal-target="instruction-modal"
-        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-2.5 sm:p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full transform opacity-0 -translate-y-full transition-all duration-700 ease-in-out">
         <div class="relative w-full max-w-lg max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal body -->
-                <div class="p-8 space-y-6">
+                <div class="py-8 px-5 sm:p-8 space-y-6">
                     <div class="flex flex-row justify-center">
                         <img src="{{ url('/images/hello-image.png') }}" alt="hello-image" class="sm:w-3/5" />
                         {{-- Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from
@@ -218,7 +218,6 @@
                         mengerti</button>
 
                     <span class="text-sm mt-4">
-
                         <a href="{{ route('info.show_information_page') }}"
                             class="text-blue-600 underline visited:text-purple-600">Klik di sini</a> untuk
                         informasi lebih lanjut
@@ -292,32 +291,39 @@
 
                 // Button-like divs click event
                 $('.dtq-div').on('click', (e) => {
-
                     if ($(e.target).is('label') || $(e.target).is('div')) {
-
                         const $checkBox = $(e.target).closest('.dtq-div').find(
                             'input[type="checkbox"]');
-                        //$checkBox.prop('checked', !$checkBox.prop('checked'));
                         handleCheckboxChange($checkBox.get(0));
                     }
                 });
 
                 //define modal options
+                const instructionModalElement = document.getElementById('instruction-modal');
+                const trModalElement = document.getElementById('test-result-modal');
                 const modalOptions = {
                     backdrop: 'static',
                     backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
                     closable: true,
-                    onHide: () => {
+                    onHide: (e) => {
+                        setTimeout(() => {
+                            e._targetEl.classList.add('-translate-y-full');
+                            e._targetEl.classList.add('opacity-0');
+                        }, 100);
                         $('div[modal-backdrop]').remove();
-                    }
+                    },
+                    onShow: function(e) {
+                        setTimeout(() => {
+                            e._targetEl.classList.remove('-translate-y-full');
+                            e._targetEl.classList.remove('opacity-0');
+                        }, 100);
+                    },
                 }
 
                 //define instruction-modal
-                const instructionModalElement = document.getElementById('instruction-modal');
                 const instructionModal = new Modal(instructionModalElement, modalOptions);
 
                 //define test-result-modal
-                const trModalElement = document.getElementById('test-result-modal');
                 const resultModal = new Modal(trModalElement, modalOptions);
 
                 //modal close event handler
@@ -327,7 +333,6 @@
                             resultModal.hide();
                             break;
                         case "instructionModal":
-                            // console.log("test");
                             instructionModal.hide();
                             break;
                         default:
@@ -347,18 +352,17 @@
                     });
                 });
 
+                $('#tombol_panduan').on('click', function() {
+                    instructionModal.show();
+                });
+
 
                 //IIFE
                 (() => {
                     if (typeof $('#main-container').data('result-success') !== 'undefined') {
 
                     } else {
-                        instructionModal.show(); //JANGAN LUPA BUKA LAGI
-                        // $("#result-desc-interpretation").text(
-                        //     "Kamu tidak memiliki gejala gangguan mental depresi.");
-                        // $("#result-desc").text("")
-                        // $('#result-totalscore').text("30");
-                        // resultModal.show();
+                        instructionModal.show();
                         return false;
                     }
 
@@ -367,11 +371,6 @@
 
                         return false;
                     } else {
-                        // $('#result-mapdsid').text(result.mapds_id);
-                        // $('#result-minscore').text(result.min_score);
-                        // $('#result-maxscore').text(result.max_score);
-                        // $('#result-desc').text(result.result_desc);
-                        // $('#result-additional-desc').text(result.result_additional_desc);
                         $('#result-totalscore').text(result.total_score);
 
                         if (result.total_score == 0) {
@@ -391,7 +390,7 @@
                         } else if (result.total_score > 40) {
                             $("#result-desc-interpretation").text("Depresi ekstrim");
                         }
-                        resultModal.show(); // JANGAN LUPA DIBUKA
+                        resultModal.show();
                     }
                 })();
 

@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 md:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 lg:flex">
 
 
                     @if (auth()->user()->role == 'admin')
@@ -31,21 +31,26 @@
                             {{ __('Diagnosis Result') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('hdr.show_diagnostic_page')" :active="request()->routeIs('hdr.show_diagnostic_page')">
-                            {{ __('Testing diagnosis') }}
+                        <x-nav-link :href="route('user.show_all_users')" :active="request()->routeIs('user.show_all_users')">
+                            {{ __('Users') }}
                         </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="route('info.show_information_page')" :active="request()->routeIs('info.show_information_page')">
-                        {{ __('Halaman Informasi') }}
-                    </x-nav-link>
+                    @if (auth()->user()->role == 'user')
+                        <x-nav-link :href="route('hdr.show_diagnostic_page')" :active="request()->routeIs('hdr.show_diagnostic_page')">
+                            {{ __('Halaman Kuesioner') }}
+                        </x-nav-link>
 
+                        <x-nav-link :href="route('info.show_information_page')" :active="request()->routeIs('info.show_information_page')">
+                            {{ __('Halaman Informasi') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden md:flex md:items-center md:ml-6">
+            <div class="hidden lg:flex lg:items-center lg:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -68,6 +73,14 @@
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('hdr.show_diagnostic_page')">
+                                {{ __('Halaman Kuesioner') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('info.show_information_page')">
+                                {{ __('Halaman Informasi') }}
+                            </x-dropdown-link>
                         @endif
 
                         <!-- Authentication -->
@@ -85,7 +98,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center md:hidden">
+            <div class="-mr-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -101,7 +114,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         @if (auth()->user()->role == 'admin')
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -134,15 +147,17 @@
                     <x-responsive-nav-link :href="route('header-diagnosis-result.index')">
                         {{ __('Diagnosis Result') }}
                     </x-responsive-nav-link>
-
-                    <x-responsive-nav-link :href="route('hdr.show_diagnostic_page')">
-                        {{ __('Testing diagnosis') }}
-                    </x-responsive-nav-link>
                 @endif
+
+
+                <x-responsive-nav-link :href="route('hdr.show_diagnostic_page')">
+                    {{ __('Halaman Kuesioner') }}
+                </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('info.show_information_page')">
                     {{ __('Halaman Informasi') }}
                 </x-responsive-nav-link>
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
