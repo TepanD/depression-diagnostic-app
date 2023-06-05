@@ -204,7 +204,7 @@
                                 dan <b>TIDAK dapat menentukan</b> apabila Anda mengalami gangguan mental depresi.
                             </li>
                             <li>
-                                Apabila sudah mengisi menjawab semua pertanyaan, silakan klik tombol "lihat hasil".
+                                Apabila semua pertanyaan telah terjawab, silakan klik tombol "lihat hasil".
                             </li>
                         </ul>
                     </div>
