@@ -68,7 +68,7 @@
                                         {{ $headerQuestion->hdq_sequence }}
                                     </label>
                                     @foreach ($detailQuestions->where('hdq_id', $headerQuestion->hdq_id)->sortBy('dtq_sequence') as $detailQuestion)
-                                        <div class="dtq-div bg-gray-50 active:bg-gray-100 sm:hover:bg-gray-100 sm:bg-white p-2 m-0.5 rounded-lg"
+                                        <div class="dtq-div bg-gray-100 active:bg-gray-100 sm:hover:bg-gray-100 sm:bg-white p-2 m-0.5 rounded-lg"
                                             style="transition-property: all;
                                         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
                                         transition-duration: 150ms;">
