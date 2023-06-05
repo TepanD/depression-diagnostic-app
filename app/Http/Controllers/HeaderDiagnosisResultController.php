@@ -15,7 +15,7 @@ class HeaderDiagnosisResultController extends Controller
      */
     public function index()
     {
-        $headerDiagnosisResults = HeaderDiagnosisResult::paginate(20);
+        $headerDiagnosisResults = HeaderDiagnosisResult::orderBy('result_date')->paginate(20);
         return view('diagnosis_result.index', compact('headerDiagnosisResults'));
     }
 
