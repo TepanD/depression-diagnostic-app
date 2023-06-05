@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <h3 class="mb-8 text-3xl font-thin text-gray-400 dark:text-white">Create an Account</h3>
+        <h3 class="mb-6 text-3xl font-thin text-gray-400 dark:text-white">Create an Account</h3>
 
         <!-- Name -->
         <div>
