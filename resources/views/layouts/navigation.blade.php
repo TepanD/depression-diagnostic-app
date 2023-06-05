@@ -147,6 +147,10 @@
                     <x-responsive-nav-link :href="route('header-diagnosis-result.index')">
                         {{ __('Diagnosis Result') }}
                     </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('user.show_all_users')">
+                        {{ __('Users') }}
+                    </x-responsive-nav-link>
                 @endif
 
 
