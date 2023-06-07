@@ -310,11 +310,32 @@
                     }
                 });
 
-                //define modal options
+                //define object instruction modal
                 const instructionModalElement = document.getElementById('instruction-modal');
-                const trModalElement = document.getElementById('test-result-modal');
-                const modalOptions = {
+                const instructionModalOptions = {
                     backdrop: 'static',
+                    backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+                    closable: false,
+                    onHide: (e) => {
+                        setTimeout(() => {
+                            e._targetEl.classList.add('-translate-y-full');
+                            e._targetEl.classList.add('opacity-0');
+                        }, 100);
+                        $('div[modal-backdrop]').remove();
+                    },
+                    onShow: function(e) {
+                        setTimeout(() => {
+                            e._targetEl.classList.remove('-translate-y-full');
+                            e._targetEl.classList.remove('opacity-0');
+                        }, 100);
+                    },
+                }
+                const instructionModal = new Modal(instructionModalElement, instructionModalOptions);
+
+                //define object test result modal
+                const trModalElement = document.getElementById('test-result-modal');
+                const trModalOptions = {
+                    backdrop: 'dynamic',
                     backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
                     closable: true,
                     onHide: (e) => {
@@ -331,12 +352,7 @@
                         }, 100);
                     },
                 }
-
-                //define instruction-modal
-                const instructionModal = new Modal(instructionModalElement, modalOptions);
-
-                //define test-result-modal
-                const resultModal = new Modal(trModalElement, modalOptions);
+                const resultModal = new Modal(trModalElement, trModalOptions);
 
                 //modal close event handler
                 const hideModal = (modalName) => {
