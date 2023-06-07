@@ -63,8 +63,7 @@
                             @csrf
                             @foreach ($headerQuestions as $headerQuestion)
                                 <div class="single-hdq-container mb-8 flex flex-col">
-                                    <label
-                                        class='block m-0.5 font-medium text-4xl font-bold text-gray-700 dark:text-gray-300'>
+                                    <label class='block m-0.5 text-4xl font-medium text-gray-700 dark:text-gray-300'>
                                         {{ $headerQuestion->hdq_sequence }}
                                     </label>
                                     @foreach ($detailQuestions->where('hdq_id', $headerQuestion->hdq_id)->sortBy('dtq_sequence') as $detailQuestion)
@@ -83,7 +82,7 @@
                                 </div>
                             @endforeach
                             <button id="btn_getResult"
-                                class="w-full flex justify-center sm:w-max inline-flex sm:items-center disabled:cursor-not-allowed disabled:bg-gray-400  px-4 py-2 bg-blue-700 dark:bg-blue-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-blue-800 uppercase tracking-widest hover:bg-blue-800 dark:hover:bg-white focus:bg-blue-700 dark:focus:bg-white active:bg-blue-900 dark:active:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                                class="w-full justify-center sm:w-max inline-flex sm:items-center disabled:cursor-not-allowed disabled:bg-gray-400  px-4 py-2 bg-blue-700 dark:bg-blue-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-blue-800 uppercase tracking-widest hover:bg-blue-800 dark:hover:bg-white focus:bg-blue-700 dark:focus:bg-white active:bg-blue-900 dark:active:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                                 type="submit" disabled>lihat hasil</button>
                         </form>
                     </div>
@@ -118,13 +117,20 @@
                             class="text-xl leading-relaxed font-semibold text-gray-600 dark:text-gray-400"
                             style="margin-top: 2.5rem !important;">
                         </h4>
-                        <small>Total Score: <b id="result-totalscore"></b></small>
+                        {{-- <small>Total Score: <b id="result-totalscore"></b></small> --}}
+
+
+                        <p id="result-additional-desc"
+                            class="text-base leading-relaxed text-gray-600 dark:text-gray-400"
+                            style="margin-top: 1.5rem !important;">
+
+                        </p>
 
                         <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400"
                             style="margin-top: 1.5rem !important;">
-                            Perlu diingat bahwa hasil dari tes <b>TIDAK</b> menentukan apabila Anda memiliki gangguan
-                            mental
-                            depresi.
+                            Perlu diingat bahwa hasil dari tes <b>BUKAN</b> keputusan akhir yang menentukan apabila Anda
+                            memiliki gangguan
+                            mental depresi.
                         </p>
                         <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400"
                             style="margin-top: 1.5rem !important;">
@@ -184,12 +190,13 @@
                     </h3>
                     <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400"
                         style="margin-top: 1.5rem !important;">
-                        Terima kasih sudah meluangkan waktu untuk mencoba <b>Sistem Pakar Pendeteksi Gangguan Mental
+                        Terima kasih sudah meluangkan waktu untuk mencoba <b>Sistem Pakar Pendeteksi Tingkatan
                             Depresi</b>.
                     </p>
 
                     <div class="text-base leading-relaxed text-gray-600 dark:text-gray-400">
-                        Pada website ini Anda akan mengerjakan sebuah kuesioner yang memiliki 21 item
+                        Pada website ini Anda akan mengerjakan sebuah kuesioner untuk mendeteksi tingkatan depresi yang
+                        memiliki 21 item
                         pertanyaan
                         di dalamnya.
                         Sebelum mulai mengerjakan, ada beberapa hal yang perlu diperhatikan:
@@ -201,7 +208,9 @@
                                 tertinggi.</li>
                             <li>Perlu diingat bahwa kuesioner yang akan Anda kerjakan adalah sebuah <b>alat
                                     tes</b>
-                                dan <b>TIDAK dapat menentukan</b> apabila Anda mengalami gangguan mental depresi.
+                                dan <b>TIDAK memberikan keputusan akhir</b> apabila Anda mengalami gangguan mental
+                                depresi.
+                                Silakan hubungi tenaga profesional seperti psikolog untuk penjelasan lebih lanjut.
                             </li>
                             <li>
                                 Apabila semua pertanyaan telah terjawab, silakan klik tombol "lihat hasil".
@@ -375,7 +384,8 @@
                         return false;
                     } else {
                         $('#result-totalscore').text(result.total_score);
-
+                        console.log(result);
+                        $('#result-additional-desc').text(result.result_additional_desc);
                         if (result.total_score == 0) {
                             $("#result-desc-interpretation").text(
                                 "Kamu tidak memiliki gejala gangguan mental depresi");

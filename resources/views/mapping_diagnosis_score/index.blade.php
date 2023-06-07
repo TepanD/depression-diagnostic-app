@@ -43,9 +43,9 @@
                                     <th scope="col" class="px-6 py-3">
                                         result_desc
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    {{-- <th scope="col" class="px-6 py-3">
                                         result_additional_desc
-                                    </th>
+                                    </th> --}}
                                     <th scope="col" class="px-6 py-3">
                                         is_active
                                     </th>
@@ -82,15 +82,8 @@
                                         <td class="px-6 py-4">
                                             {{ $mappingDiagnosisScore->result_desc }}
                                         </td>
-                                        <td class="px-6 py-4">
-                                            {{ $mappingDiagnosisScore->result_additional_desc }}
-                                        </td>
                                         {{-- <td class="px-6 py-4">
-                                            <div class="flex items-center">
-                                                <input {{ $mappingDiagnosisScore->is_active == 'T' ? 'checked' : '' }}
-                                                    disabled id="checkbox-table-search-1" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            </div>
+                                            {{ $mappingDiagnosisScore->result_additional_desc }}
                                         </td> --}}
                                         <td class="px-6 py-4">
                                             <label class="relative inline-flex items-center mb-4 cursor-pointer">
@@ -135,7 +128,7 @@
 
     {{-- DELETE HeaderQuestion Modal --}}
     <div id="confirm-delete-modal" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full transition-opacity transition-transform duration-300">
+        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full transition-all duration-300">
         <div class="relative w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <button type="button"

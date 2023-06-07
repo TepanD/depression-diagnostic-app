@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Mapping Diagnosis Score') }}
+            {{ __('Users') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-32">
             <div class="container mx-auto dark:bg">
-
-                {{-- HIDDEN VALUES --}}
-                {{-- <span id="update_id" style="display:hidden;"></span> --}}
 
                 {{-- TABLE CONTAINER TESTING STYLE --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-8">

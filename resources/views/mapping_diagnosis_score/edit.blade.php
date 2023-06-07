@@ -44,10 +44,8 @@
                         @endif
                         <br />
                         <x-input-label for="result_additional_desc" :value="__('Result Additional Description')" />
-                        <textarea id="txt_resultadddesc" name="result_additional_desc"
-                            value="{{ old('result_additional_desc', $mappingDiagnosisScore->result_additional_desc) }}" rows="5"
-                            cols="60"
-                            class="{{ $errors->has('result_additional_desc') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"></textarea>
+                        <textarea id="txt_resultadddesc" name="result_additional_desc" rows="5" cols="60"
+                            class="{{ $errors->has('result_additional_desc') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ old('result_additional_desc', $mappingDiagnosisScore->result_additional_desc) }}</textarea>
                         @error('result_additional_desc')
                             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                                 {{ $message }}
@@ -58,7 +56,7 @@
                         @endif
                         <br />
                         <x-input-label for="min_score" :value="__('Minimum Score')" />
-                        <input type="number" min="1" name="min_score" id="txt_minscore"
+                        <input type="number" min="0" name="min_score" id="txt_minscore"
                             value="{{ old('min_score', $mappingDiagnosisScore->min_score) }}"
                             class="{{ $errors->has('min_score') ? 'dark:border-red-500' : 'dark:border-gray-700' }} dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                         @error('min_score')

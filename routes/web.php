@@ -28,9 +28,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
     Route::get('/information-page', [InformationPageController::class, 'show_information_page'])->name('info.show_information_page');
     
