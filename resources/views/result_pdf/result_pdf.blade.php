@@ -14,21 +14,6 @@
     <p>Name: {{ $user->name }}</p>
     <p>Total Skor: {{ $totalScore }}</p>
 
-    {{-- <div>
-        @foreach ($headerQuestions as $headerQuestion)
-            <div style="margin-bottom: 14.5px">
-                <h5>
-                    {{ $headerQuestion->hdq_name }}
-                </h5>
-                @foreach ($detailQuestions->where('hdq_id', $headerQuestion->hdq_id)->sortBy('dtq_sequence') as $detailQuestion)
-                    <p>
-                        {{ $detailQuestion->score }}. {{ $detailQuestion->dtq_name }}
-                    </p>
-                @endforeach
-            </div>
-        @endforeach
-    </div> --}}
-
     <table class="table table-bordered">
         <tr>
             <th>ITEM</th>
@@ -44,9 +29,9 @@
         @endforeach
     </table>
 
-    <small>*<i>File ini <b>TIDAK</b> berasal dari badan atau tenaga profesional yang resmi. Harap hubungi tenaga
+    <small>*<i>Website hanya merekomendasikan dan menyediakan resources. Harap hubungi tenaga
             profesional
-            seperti psikolog untuk pemeriksaan lebih lanjut.</i></small>
+            seperti psikolog untuk pemeriksaan lebih lanjut dan berikan file ini apabila diperlukan.</i></small>
 
 </body>
 

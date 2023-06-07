@@ -53,7 +53,8 @@
                             <p class="mb-2 text-gray-500 dark:text-gray-400">
                                 Beck Depression Inventory-ii (BDI-ii) adalah salah satu sebuah alat tes yang digunakan
                                 untuk melakukan pendeteksian tingkat keparahan dari gangguan mental depresi.
-                                Kuesioner ini <b>TIDAK</b> dapat menentukan apabila seseorang mengalami gangguan mental
+                                Kuesioner ini <b>TIDAK</b> dapat memberikan keputusan akhir apabila seseorang mengalami
+                                gangguan mental
                                 depresi.
                             </p>
                             <p class="mb-2 text-gray-500 dark:text-gray-400">
@@ -86,7 +87,7 @@
                                 Skor 17 atau lebih mengindikasikan bahwa kemungkinan Anda membutuhkan bantuan secara
                                 medis.
                                 Segera hubungi tenaga profesional di bidangnya seperti psikolog, psikiater, atau
-                                sejenisnya yang ada di sekitar tempat Anda tinggal.
+                                konselor yang ada di sekitar tempat Anda tinggal.
                             </p>
 
                         </div>
