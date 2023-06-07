@@ -141,7 +141,8 @@
 
                         <p class="text-base leading-relaxed text-gray-600 dark:text-gray-400"
                             style="margin-top: 1.5rem !important;">
-                            Silakan klik tombol Download di bawah untuk mengunduh file PDF hasil tes.
+                            Apabila dibutuhkan, silakan klik tombol Download di bawah untuk mengunduh file PDF hasil
+                            tes.
                         </p>
                         <a href="{{ route('hdr.download_pdf') }}" style="margin-top:1rem !important;"
                             class="px-4 py-2 bg-red-700 hover:bg-red-800 rounded-md text-sm text-white outline-none focus:ring-4 flex items-center max-w-max">
