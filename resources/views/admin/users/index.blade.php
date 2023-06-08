@@ -18,6 +18,9 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
+                                        No.
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         user_id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -29,12 +32,18 @@
                                     <th scope="col" class="px-6 py-3">
                                         is_admin
                                     </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        created_at
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($users as $key => $user)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td class="px-6 py-4">
+                                            {{ $users->firstItem() + $key }}
+                                        </td>
                                         <td scope="row" class="px-6 py-4 mapds_id">
                                             {{ $user->id }}
                                         </td>
@@ -44,9 +53,6 @@
                                         <td class="px-6 py-4">
                                             {{ $user->email }}
                                         </td>
-                                        {{-- <td class="px-6 py-4">
-                                            {{ $mappingDiagnosisScore->result_desc }}
-                                        </td> --}}
                                         <td class="px-6 py-4">
                                             <label class="relative inline-flex items-center mb-4 cursor-pointer">
                                                 <input {{ $user->role == 'admin' ? 'checked' : '' }} type="checkbox"

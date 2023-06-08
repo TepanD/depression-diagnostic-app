@@ -23,7 +23,7 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
             <h2 class="text-2xl font-extrabold leading-9 tracking-tight text-gray-600 dark:text-gray-100">
-                Sistem Pakar Pendeteksi Gangguan Mental Depresi
+                Sistem Pakar Pendeteksi Tingkatan Depresi
             </h2>
         </div>
 
