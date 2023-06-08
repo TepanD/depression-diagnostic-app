@@ -27,10 +27,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
+    //############### Routes for primary users pages #################
     Route::get('/', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
+    // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
+    Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
+    Route::get('/admin/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
+    Route::get('download-pdf',[DiagnosticController::class, 'download_pdf'])->name('hdr.download_pdf');
+    Route::post('/diagnosis/store_instruction_read_session', [DiagnosticController::class, 'store_instruction_read_session']);
 
     Route::get('/information-page', [InformationPageController::class, 'show_information_page'])->name('info.show_information_page');
-    
+    //############### END OF Routes for primary users pages #################
+
     Route::group(['middleware'=>['is_admin']], function(){
 
 
@@ -75,10 +82,6 @@ Route::middleware('auth')->group(function () {
         //############### END OF Routes for User List #############
     });
    
-    // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
-    Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
-    Route::get('/admin/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
-    Route::get('download-pdf',[DiagnosticController::class, 'download_pdf'])->name('hdr.download_pdf');
 });
 
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Sistem Pakar Pendeteksi Gangguan Mental Depresi') }}
+            {{ __('Sistem Pakar Pendeteksi Tingkatan Depresi') }}
         </h2>
     </x-slot>
 
@@ -226,7 +226,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex flex-col p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="button"
+                    <button type="button" id="btn_readInstruction"
                         class="close-instruct-modal w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saya
                         mengerti</button>
 
@@ -377,7 +377,37 @@
 
                 $('.close-instruct-modal').each(function() {
                     $(this).on('click', () => {
-                        hideModal("instructionModal")
+                        $.ajax({
+                            url: "{{ url('/') }}/diagnosis/store_instruction_read_session",
+                            method: "POST",
+                            data: {
+                                is_read: true,
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content')
+                            },
+                            success: (data) => {
+                                hideModal("instructionModal");
+                                $('.single-hdq-container').get(0)
+                                    .scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'end'
+                                    });
+                            },
+                            error: function(data, status, error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    html: '<ul><li>data:' + data +
+                                        '</li>' +
+                                        '<li>status: ' + status +
+                                        '</li>' +
+                                        '<li>error: ' + error +
+                                        '</li>' +
+                                        '</ul>'
+                                });
+                            }
+                        });
                     });
                 });
 
@@ -391,7 +421,9 @@
                     if (typeof $('#main-container').data('result-success') !== 'undefined') {
 
                     } else {
-                        instructionModal.show();
+                        if ("{{ Session::get('is_read') }}" == "false") {
+                            instructionModal.show();
+                        }
                         return false;
                     }
 
@@ -400,8 +432,7 @@
 
                         return false;
                     } else {
-                        $('#result-totalscore').text(result.total_score);
-                        console.log(result);
+                        // $('#result-totalscore').text(result.total_score);
                         $('#result-additional-desc').text(result.result_additional_desc);
                         if (result.total_score == 0) {
                             $("#result-desc-interpretation").text(

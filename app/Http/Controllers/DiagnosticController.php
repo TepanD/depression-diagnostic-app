@@ -25,6 +25,9 @@ class DiagnosticController extends Controller
     */
     public function show_diagnostic_page()
     {
+        if(!session('is_read')){
+            session(['is_read' => "false"]);
+        }
         $headerQuestions = HeaderQuestion::orderBy('hdq_sequence', 'ASC')->where('is_active', 'T')->get();
         $detailQuestions = DetailQuestion::all();
         return view('diagnosis.index', compact('headerQuestions', 'detailQuestions'));
@@ -99,6 +102,13 @@ class DiagnosticController extends Controller
         $headerQuestions = HeaderQuestion::orderBy('hdq_sequence', 'ASC')->where('is_active', 'T')->get();
         $detailQuestions = DetailQuestion::all();
         return view('admin.test-diagnosis.index', compact('headerQuestions', 'detailQuestions'));
+    }
+
+    public function store_instruction_read_session(Request $request){
+        if($request->ajax()){
+            session(['is_read' => 'true']);
+            echo "berhasil push session";
+        }
     }
 
     public function generate_pdf($hdrId, $totalScore){
