@@ -13,8 +13,8 @@ class MappingDiagnosisScoreController extends Controller
      */
     public function index()
     {
-        $mappingDiagnosisScores = MappingDiagnosisScore::all();
-        return view('mapping_diagnosis_score.index',compact('mappingDiagnosisScores'));
+        $mappingDiagnosisScores = MappingDiagnosisScore::orderBy('created_at')->paginate(10);
+        return view('admin.mapping_diagnosis_score.index',compact('mappingDiagnosisScores'));
     }
 
     /**
@@ -22,7 +22,7 @@ class MappingDiagnosisScoreController extends Controller
      */
     public function create()
     {
-        return view('mapping_diagnosis_score.create');
+        return view('admin.mapping_diagnosis_score.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class MappingDiagnosisScoreController extends Controller
     public function edit(string $mapds_id)
     {
         $mappingDiagnosisScore = MappingDiagnosisScore::findOrFail($mapds_id);
-        return view('mapping_diagnosis_score.edit', compact('mappingDiagnosisScore'));
+        return view('admin.mapping_diagnosis_score.edit', compact('mappingDiagnosisScore'));
     }
 
     /**

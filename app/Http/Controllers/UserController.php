@@ -11,7 +11,7 @@ class UserController extends Controller
     public function show_all_users()
     {
         $users = User::where('id', '!=', auth()->id())->paginate(10);
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function update_user_role(Request $request){

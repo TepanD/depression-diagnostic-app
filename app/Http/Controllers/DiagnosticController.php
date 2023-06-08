@@ -98,7 +98,7 @@ class DiagnosticController extends Controller
     public function demo_diagnostic_page(){
         $headerQuestions = HeaderQuestion::orderBy('hdq_sequence', 'ASC')->where('is_active', 'T')->get();
         $detailQuestions = DetailQuestion::all();
-        return view('test-diagnosis.index', compact('headerQuestions', 'detailQuestions'));
+        return view('admin.test-diagnosis.index', compact('headerQuestions', 'detailQuestions'));
     }
 
     public function generate_pdf($hdrId, $totalScore){

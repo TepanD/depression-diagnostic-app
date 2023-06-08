@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Question') }}
+            {{ __('Mapping Diagnosis Score') }}
         </h2>
     </x-slot>
 
@@ -10,17 +10,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-32">
             <div class="container mx-auto dark:bg">
 
+                {{-- HIDDEN VALUES --}}
+                <span id="update_id" style="display:hidden;"></span>
+
                 {{-- UPPER CONTAINER --}}
-                <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg mb-5">
-                    <div class="relative rounded-xl">
-                        <div class="flex items-center shadow-sm overflow-hidden p-4">
-                            <a href="{{ route('questions.create') }}"
-                                class="mr-6 px-4 py-2 font-semibold text-sm hover:bg-blue-500 bg-blue-600 duration-100 text-white rounded-md shadow-sm opacity-100">Add</a>
-
-
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-5">
+                    <div class="relative rounded-xl overflow-auto">
+                        <div class="shadow-sm overflow-hidden p-4">
+                            <a href="{{ route('mapping-diagnosis-score.create') }}"
+                                class="px-4 py-2 font-semibold text-sm hover:bg-blue-500 bg-blue-600 duration-100 text-white rounded-md shadow-sm opacity-100">Add</a>
                         </div>
                     </div>
                 </div>
+
 
                 {{-- TABLE CONTAINER TESTING STYLE --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-8">
@@ -30,14 +32,23 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        hdq_id
+                                        No.
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        hdq_name
+                                        mapds_id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        seq
+                                        min_score
                                     </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        max_score
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        result_desc
+                                    </th>
+                                    {{-- <th scope="col" class="px-6 py-3">
+                                        result_additional_desc
+                                    </th> --}}
                                     <th scope="col" class="px-6 py-3">
                                         is_active
                                     </th>
@@ -59,22 +70,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($headerQuestions as $headerQuestion)
+                                @foreach ($mappingDiagnosisScores as $key => $mappingDiagnosisScore)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td scope="row" class="px-6 py-4 hdq_id">
-                                            {{ $headerQuestion->hdq_id }}
+                                        <td class="px-6 py-4">
+                                            {{ $mappingDiagnosisScores->firstItem() + $key }}
+                                        </td>
+                                        <td scope="row" class="px-6 py-4 mapds_id">
+                                            {{ $mappingDiagnosisScore->mapds_id }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->hdq_name }}
+                                            {{ $mappingDiagnosisScore->min_score }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->hdq_sequence }}
+                                            {{ $mappingDiagnosisScore->max_score }}
                                         </td>
+                                        <td class="px-6 py-4">
+                                            {{ $mappingDiagnosisScore->result_desc }}
+                                        </td>
+                                        {{-- <td class="px-6 py-4">
+                                            {{ $mappingDiagnosisScore->result_additional_desc }}
+                                        </td> --}}
                                         <td class="px-6 py-4">
                                             <label class="relative inline-flex items-center mb-4 cursor-pointer">
-                                                <input {{ $headerQuestion->is_active == 'T' ? 'checked' : '' }}
-                                                    type="checkbox" id="{{ $headerQuestion->hdq_id }}"
+                                                <input {{ $mappingDiagnosisScore->is_active == 'T' ? 'checked' : '' }}
+                                                    type="checkbox" id="{{ $mappingDiagnosisScore->mapds_id }}"
                                                     class="sr-only peer switch-isactive">
                                                 <div
                                                     class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
@@ -82,19 +102,19 @@
                                             </label>
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->created_at }}
+                                            {{ $mappingDiagnosisScore->created_at }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->create_operator }}
+                                            {{ $mappingDiagnosisScore->create_operator }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->updated_at }}
+                                            {{ $mappingDiagnosisScore->updated_at }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $headerQuestion->last_operator }}
+                                            {{ $mappingDiagnosisScore->last_operator }}
                                         </td>
                                         <td class="flex items-center px-6 py-4 space-x-3">
-                                            <a href="{{ route('questions.edit', $headerQuestion->hdq_id) }}"
+                                            <a href="{{ route('mapping-diagnosis-score.edit', $mappingDiagnosisScore->mapds_id) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                             <button data-modal-target="confirm-delete-modal"
                                                 data-modal-toggle="confirm-delete-modal"
@@ -107,15 +127,14 @@
                     </div>
                 </div>
 
-                {{ $headerQuestions->links() }}
-
+                {{ $mappingDiagnosisScores->links() }}
             </div>
         </div>
     </div>
 
     {{-- DELETE HeaderQuestion Modal --}}
     <div id="confirm-delete-modal" tabindex="-1"
-        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full transition-opacity transition-transform duration-300">
+        class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full transition-all duration-300">
         <div class="relative w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <button type="button"
@@ -135,10 +154,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Confirm delete Header
-                        Question?</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Confirm delete?</h3>
 
-                    <form method="POST" action="{{ route('questions.destroy', 0) }}" style="display:inline;">
+                    <form method="POST" action="{{ route('mapping-diagnosis-score.destroy', 0) }}"
+                        style="display:inline;">
                         @csrf
                         @method('DELETE')
 
@@ -146,7 +165,7 @@
                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Yes, I'm sure
                         </button>
-                        <input type="hidden" id="hidHdqID" name="hidHdqID">
+                        <input type="hidden" id="hidMapDiagId" name="hidMapDiagId">
                     </form>
                     <button data-modal-hide="confirm-delete-modal" type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
@@ -160,11 +179,11 @@
     <script>
         document.querySelectorAll('.del_button').forEach((item) => {
             item.addEventListener('click', (e) => {
-                let hdqID = e.target.closest('tr').querySelector('.hdq_id').innerText;
-                console.log(hdqID);
-                document.getElementById('hidHdqID').value = hdqID;
+                let mdsID = e.target.closest('tr').querySelector('.mapds_id').innerText;
+                document.getElementById('hidMapDiagId').value = mdsID;
             });
         });
+
         document.addEventListener('DOMContentLoaded', function() {
             $(document).ready(() => {
 
@@ -177,14 +196,14 @@
 
                 $(document).on('click', '.switch-isactive', (e) => {
                     let checked = $(e.target).is(':checked') ? "T" : "F";
-                    let hdq_id = $(e.target).attr('id');
+                    let mapds_id = $(e.target).attr('id');
 
                     $.ajax({
-                        url: "{{ url('/') }}/questions/update_hdq_is_active",
+                        url: "{{ url('/') }}/mapping-diagnosis-score/update_mapds_is_active",
                         method: "PUT",
                         data: {
                             is_active: checked,
-                            hdq_id: hdq_id,
+                            mapds_id: mapds_id,
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -192,7 +211,7 @@
                         success: (data) => {
                             Toast.fire({
                                 icon: 'success',
-                                title: `${hdq_id} ${checked === "T" ? "is activated" : "is deactivated"}`
+                                title: `${mapds_id} ${checked === "T" ? "is activated" : "is deactivated"}`
                             });
                         },
                         error: function(data, status, error) {
@@ -210,6 +229,7 @@
                     })
 
                 });
+
             });
         }, false);
     </script>

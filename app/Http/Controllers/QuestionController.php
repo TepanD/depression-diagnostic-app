@@ -20,7 +20,7 @@ class QuestionController extends Controller
     {
         $headerQuestions = HeaderQuestion::paginate(10);
 
-        return view('questions.index', compact('headerQuestions'));
+        return view('admin.questions.index', compact('headerQuestions'));
     }
 
     /**
@@ -28,7 +28,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('questions.create');
+        return view('admin.questions.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class QuestionController extends Controller
     public function edit(string $hdq_id)
     {
         $headerQuestion = HeaderQuestion::findOrFail($hdq_id);
-        return view('questions.edit', compact('headerQuestion'));
+        return view('admin.questions.edit', compact('headerQuestion'));
     }
 
     /**
