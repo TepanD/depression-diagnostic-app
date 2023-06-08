@@ -34,13 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware'=>['is_admin']], function(){
 
 
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         //############### Routes for HeaderQuestion, DetailQuestions #############
-        Route::get('/questions/search_header_question', [QuestionController::class, "search_header_question"]);
-        Route::get('/questions/fetch_detail_question', [QuestionController::class, "fetch_detail_question"]);
+        Route::get('/admin/questions/search_header_question', [QuestionController::class, "search_header_question"]);
+        Route::get('/admin/questions/fetch_detail_question', [QuestionController::class, "fetch_detail_question"]);
         Route::post('/questions/store_detail_question', [QuestionController::class, "store_detail_question"])->name(
             'questions.store_detail_question'
         );
@@ -71,13 +71,13 @@ Route::middleware('auth')->group(function () {
 
         //############### Routes for User List #############
         Route::put('/users/update_user_role', [UserController::class, "update_user_role"])->name('user.update_user_role');
-        Route::get('users', [UserController::class, "show_all_users"])->name('user.show_all_users');
+        Route::get('/admin/users', [UserController::class, "show_all_users"])->name('user.show_all_users');
         //############### END OF Routes for User List #############
     });
    
     // Route::get('/test-diagnosis', [DiagnosticController::class, 'show_diagnostic_page'])->name('hdr.show_diagnostic_page');
     Route::post('/test-diagnosis', [DiagnosticController::class, 'store_diagnostic_result'])->name('hdr.store_diagnostic_result');
-    //Route::get('/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
+    Route::get('/admin/demo-diagnosis', [DiagnosticController::class, 'demo_diagnostic_page'])->name('hdr.demo_diagnostic');
     Route::get('download-pdf',[DiagnosticController::class, 'download_pdf'])->name('hdr.download_pdf');
 });
 

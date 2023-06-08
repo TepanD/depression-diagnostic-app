@@ -18,6 +18,9 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
+                                        No.
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         hdr_id
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -41,9 +44,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($headerDiagnosisResults as $headerDiagnosisResult)
+                                @foreach ($headerDiagnosisResults as $key => $headerDiagnosisResult)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td class="px-6 py-4">
+                                            {{ $headerDiagnosisResults->firstItem() + $key }}
+                                        </td>
                                         <td scope="row" class="px-6 py-4 hdr_id">
                                             {{ $headerDiagnosisResult->hdr_id }}
                                         </td>
