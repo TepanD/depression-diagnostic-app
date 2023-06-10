@@ -154,7 +154,7 @@
 
                 const fetch_data = (hdr_id) => {
                     $.ajax({
-                        url: "{{ url('/') }}/header-diagnosis-result/fetch_detail_diagnosis_result_by_hdr_id",
+                        url: "{{ url('/') }}/admin/header-diagnosis-result/fetch_detail_diagnosis_result_by_hdr_id",
                         data: {
                             hdr_id: hdr_id
                         },

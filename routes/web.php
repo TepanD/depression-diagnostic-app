@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
         //############### END OF Routes for Mapping Diagnosis Score #############
 
         //############### Routes for Diagnosis Results #############
-        Route::get('/header-diagnosis-result/fetch_detail_diagnosis_result_by_hdr_id', [HeaderDiagnosisResultController::class, "fetch_detail_diagnosis_result_by_hdr_id"]);
+        Route::get('/admin/header-diagnosis-result/fetch_detail_diagnosis_result_by_hdr_id', [HeaderDiagnosisResultController::class, "fetch_detail_diagnosis_result_by_hdr_id"]);
         Route::resource('header-diagnosis-result', HeaderDiagnosisResultController::class);
         //############### END OF Routes for Diagnosis Results #############
 
