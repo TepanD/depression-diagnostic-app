@@ -117,7 +117,8 @@
                             class="text-xl leading-relaxed font-semibold text-gray-600 dark:text-gray-400"
                             style="margin-top: 2.5rem !important;">
                         </h4>
-                        {{-- <small>Total Score: <b id="result-totalscore"></b></small> --}}
+                        <small>Total Score: <b id="result-totalscore"></b></small>
+                        <small>Skala BDI-ii: <b id="result-skala"></b></small>
 
 
                         <p id="result-additional-desc"
@@ -432,8 +433,11 @@
 
                         return false;
                     } else {
-                        // $('#result-totalscore').text(result.total_score);
                         $('#result-additional-desc').text(result.result_additional_desc);
+                        $('#result-skala').text(result.result_desc);
+                        $('#result-totalscore').text(result.total_score);
+                        console.log(result);
+
                         if (result.total_score == 0) {
                             $("#result-desc-interpretation").text(
                                 "Kamu tidak memiliki gejala gangguan mental depresi");

@@ -41,14 +41,16 @@
         </div>
 
         <div class="flex flex-col items-center gap-3 mt-8">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+
 
             <x-primary-button class="w-full">
                 {{ __('Register') }}
             </x-primary-button>
+
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
         </div>
     </form>
 </x-guest-layout>
