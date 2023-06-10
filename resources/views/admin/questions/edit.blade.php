@@ -127,7 +127,7 @@
 
             const fetch_data = () => {
                 $.ajax({
-                    url: "{{ url('/') }}/questions/fetch_detail_question",
+                    url: "{{ url('/') }}/admin/questions/fetch_detail_question",
                     data: {
                         hdq_id: "{{ $headerQuestion->hdq_id }}"
                     },
