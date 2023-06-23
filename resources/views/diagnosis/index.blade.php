@@ -10,7 +10,7 @@
             display: none;
         }
 
-        @keyframes strike {
+        /* @keyframes strike {
             0% {
                 width: 0;
             }
@@ -18,14 +18,17 @@
             100% {
                 width: 100%;
             }
-        }
+        } */
 
         .strike {
-            position: relative;
+            /* position: relative; */
             opacity: 0.3;
+            text-decoration: line-through;
+            transition-property: opacity;
+            transition-duration: 0.2s;
         }
 
-        .strike::after {
+        /* .strike::after {
             content: ' ';
             position: absolute;
             top: 50%;
@@ -38,7 +41,7 @@
             animation-timing-function: linear;
             animation-iteration-count: 1;
             animation-fill-mode: forwards;
-        }
+        } */
 
         li {
             list-style: disc !important;
